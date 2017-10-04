@@ -7,6 +7,27 @@ var config = {
     storageBucket: "singin-ba4f0.appspot.com",
     messagingSenderId: "412372715700"
 };
+
+//facebook SDK
+window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '154400321824663',
+      xfbml      : true,
+      version    : 'v2.10'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+
+  
 firebase.initializeApp(config);
 
 database = firebase.database();
@@ -102,9 +123,9 @@ $("#btnFacebook").on('click', function() {
 
     var provider = new firebase.auth.FacebookAuthProvider();
 
-    // provider.addScope('user_friends');
+    provider.addScope('user_friends');
     firebase.auth().signInWithRedirect(provider);
-    
+
     firebase.auth().getRedirectResult().then(function(result) {
 
         if (result.credential) {
