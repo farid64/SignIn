@@ -27,7 +27,7 @@ window.fbAsyncInit = function() {
    }(document, 'script', 'facebook-jssdk'));
 
 
-  
+
 firebase.initializeApp(config);
 
 database = firebase.database();
@@ -44,6 +44,7 @@ function loadUser() {
 
     if (user != null) {
         $("#content").html("<h1>" + user.email + " : " + user.displayName + "</h1>");
+
     }
 }
 
@@ -90,6 +91,9 @@ firebase.auth().onAuthStateChanged(function(firebaseUser) {
         $("#btnLogout").removeClass("hide");
         $("#btnLogout").addClass("show");
         loadUser();
+        FB.api('/me/friends', function(response) {
+                        console.log(response);
+            });
     } else {
         console.log('not logged in');
         $("#btnLogout").removeClass("show");
@@ -135,6 +139,7 @@ $("#btnFacebook").on('click', function() {
         }
         // The signed-in user info.
         var user = result.user;
+        console.log(user);
 
     }).catch(function(error) {
         // Handle Errors here.
