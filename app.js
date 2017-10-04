@@ -125,6 +125,7 @@ $("#btnFacebook").on('click', function() {
     var provider = new firebase.auth.FacebookAuthProvider();
 
     provider.addScope('user_friends');
+
     firebase.auth().signInWithRedirect(provider);
 
     firebase.auth().getRedirectResult().then(function(result) {
@@ -133,7 +134,8 @@ $("#btnFacebook").on('click', function() {
             // This gives you a Facebook Access Token. You can use it to access the Facebook API.
             var token = result.credential.accessToken;
             // ...
-            FB.api("/{friend-list-id}", {access_token : token}, function(response) {
+            //, {access_token : token}
+            FB.api("/me/friends", function(response) {
                         console.log(response);
             });
         }
