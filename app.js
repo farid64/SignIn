@@ -84,10 +84,10 @@
 
   $("#enterAddress").on('click' , function(){
     var emailz = firebase.auth().currentUser.email;
-    console.log(emailz);
+
     var addr = $("#address").val().trim();
     emailz = emailz.replace("." , ",");
-    console.log(emailz);
+
     database.ref('/Users/' + emailz).update({
       'address' : addr
     })
@@ -97,6 +97,7 @@
   //This section is for facebook login
 
   $("#btnFacebook").on('click' , function(){
+    console.log("Facebook");
 
   var provider = firebase.auth.FacebookAuthProvider();
 
