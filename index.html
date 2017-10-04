@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+<body>
+	<div class="container">
+		<input id="txtEmail" type="email" placeholder="Email">
+
+		<input id="txtPassword" type="password" placeholder="Password">
+
+		<button id="btnLogin" class="btn btn-action">Log in</button>
+
+		<button id="btnSignUp" class="btn btn-secondary">
+			Sign Up
+		</button>
+
+		<button id="btnLogout" class="btn btn-action hide">
+			Log out
+		</button>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<p id="content"></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<input id="address" type="text" placeholder="address">
+				<button id="enterAddress" class="btn btn-action">Enter Address</button>
+			</div>
+		</div>
+	</div>
+
+	<script
+  	src="https://code.jquery.com/jquery-3.2.1.min.js"
+  	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  	crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="app.js"></script>
+
+</body>
+</html>
