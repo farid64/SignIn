@@ -35,7 +35,7 @@ var txtPassword = $("#txtPassword");
 // var btnLogout = $("#btnLogout");
 
 $("#btnLogin").on('click', function() {
-  
+
     console.log("olleh");
     var email = txtEmail.val();
     var pass = txtPassword.val();
@@ -103,7 +103,8 @@ $("#btnFacebook").on('click', function() {
     var provider = new firebase.auth.FacebookAuthProvider();
 
     // provider.addScope('user_friends');
-
+    firebase.auth().signInWithRedirect(provider);
+    
     firebase.auth().getRedirectResult().then(function(result) {
 
         if (result.credential) {
