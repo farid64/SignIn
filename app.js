@@ -91,9 +91,6 @@ firebase.auth().onAuthStateChanged(function(firebaseUser) {
         $("#btnLogout").removeClass("hide");
         $("#btnLogout").addClass("show");
         loadUser();
-        FB.api('/me/friends', function(response) {
-                        console.log(response);
-            });
     } else {
         console.log('not logged in');
         $("#btnLogout").removeClass("show");
@@ -136,10 +133,14 @@ $("#btnFacebook").on('click', function() {
             // This gives you a Facebook Access Token. You can use it to access the Facebook API.
             var token = result.credential.accessToken;
             // ...
+            FB.api('/me/friends', {access_token : token}, function(response) {
+                        console.log(response);
+            });
         }
         // The signed-in user info.
         var user = result.user;
         console.log(user);
+
 
     }).catch(function(error) {
         // Handle Errors here.
