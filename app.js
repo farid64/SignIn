@@ -96,7 +96,7 @@ firebase.auth().onAuthStateChanged(function(firebaseUser) {
 
     database.ref('/Users/' + userUID).once("value").then( function(user){
         if(!user){
-            database.ref("/Users" + usrUID).set({
+            database.ref("/Users" + userUID).set({
                 'email' : firebaseUser.email,
                 'address' : '',
                 'displayName' : firebaseUser.displayName,
