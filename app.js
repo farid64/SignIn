@@ -63,7 +63,7 @@ $("#btnLogin").on('click', function() {
     var pass = txtPassword.val();
     var auth = firebase.auth();
     // sing in
-    var promise = auth.signInWithEmailAndPassword(email, pass);
+    auth.signInWithEmailAndPassword(email, pass);
 
 })
 
@@ -76,15 +76,19 @@ $("#btnSignUp").on('click', function() {
     window.email = email;
 
     // sing up
-    var promise = auth.createUserWithEmailAndPassword(email, pass);
-    // create a new Node
-    database.ref('/Users/' + emailDisguise(window.email)).set({
+   auth.createUserWithEmailAndPassword(email, pass).then(function(user){
+     // create a new Node
+
+    database.ref('/Users/' + user.uid).set({
         'email': email,
         'address': "18440 hatteras st"
     })
+   });
+   
 })
 
 firebase.auth().onAuthStateChanged(function(firebaseUser) {
+    console.log(firebaseUser)
 
     if (firebaseUser) {
         // console.log(firebaseUser);
@@ -105,10 +109,11 @@ $("#btnLogout").on('click', function() {
 })
 
 $("#enterAddress").on('click', function() {
-    var emailz = firebase.auth().currentUser.email;
+
+    var emailz = firebase.auth().currentUser.uid;
 
     var addr = $("#address").val().trim();
-    emailz = emailz.replace(".", ",");
+    // emailz = emailz.replace(".", ",");
 
     database.ref('/Users/' + emailz).update({
         'address': addr
@@ -156,3 +161,15 @@ $("#btnFacebook").on('click', function() {
     });
 
 });
+
+$("#btnList").on('click' , function(){
+    database.ref('/Users/').once("value").then(function(snapshot){
+        var users = snapshot.val();
+
+        var arr = [];
+        for(var key in users){ //this little loop gives each entry of the object
+            arr.push(key);
+        }
+        console.log(arr);
+    })
+})
