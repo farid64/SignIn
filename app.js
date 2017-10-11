@@ -79,10 +79,10 @@ $("#btnSignUp").on('click', function() {
    auth.createUserWithEmailAndPassword(email, pass).then( function(user){
      // create a new Node
 
-    database.ref('/Users/' + user.uid).set({
-        'email': email,
-        'address': "18440 hatteras st"
-    })
+    // database.ref('/Users/' + user.uid).set({
+    //     'email': email,
+    //     'address': "18440 hatteras st"
+    // })
    });
    
 })
@@ -90,13 +90,15 @@ $("#btnSignUp").on('click', function() {
 firebase.auth().onAuthStateChanged(function(firebaseUser) {
     console.log(firebaseUser)
 
-    $("#profileImg").attr("src" , firebaseUser.photoURL);
+    // $("#profileImg").attr("src" , firebaseUser.photoURL);
 
     var userUID = firebaseUser.uid;
 
+    console.log(userUID);
+
     database.ref('/Users/' + userUID).once("value").then( function(user){
-        if(!user){
-            database.ref("/Users" + userUID).set({
+        if(!user.val()){
+            database.ref("/Users/" + userUID).set({
                 'email' : firebaseUser.email,
                 'address' : '',
                 'displayName' : firebaseUser.displayName,
