@@ -76,7 +76,7 @@ $("#btnSignUp").on('click', function() {
     window.email = email;
 
     // sing up
-   auth.createUserWithEmailAndPassword(email, pass).then(function(user){
+   auth.createUserWithEmailAndPassword(email, pass).then( function(user){
      // create a new Node
 
     database.ref('/Users/' + user.uid).set({
@@ -89,6 +89,8 @@ $("#btnSignUp").on('click', function() {
 
 firebase.auth().onAuthStateChanged(function(firebaseUser) {
     console.log(firebaseUser)
+
+    $("#profileImg").attr("src" , firebaseUser.photoURL);
 
     if (firebaseUser) {
         // console.log(firebaseUser);
@@ -110,12 +112,12 @@ $("#btnLogout").on('click', function() {
 
 $("#enterAddress").on('click', function() {
 
-    var emailz = firebase.auth().currentUser.uid;
+    var uid = firebase.auth().currentUser.uid;
 
     var addr = $("#address").val().trim();
     // emailz = emailz.replace(".", ",");
 
-    database.ref('/Users/' + emailz).update({
+    database.ref('/Users/' + uid).update({
         'address': addr
     })
 })
