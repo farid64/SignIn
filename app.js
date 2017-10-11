@@ -92,6 +92,19 @@ firebase.auth().onAuthStateChanged(function(firebaseUser) {
 
     $("#profileImg").attr("src" , firebaseUser.photoURL);
 
+    var userUID = firebaseUser.uid;
+
+    database.ref('/Users/' + userUID).once("value").then( function(user){
+        if(!user){
+            database.ref("/Users" + usrUID).set({
+                'email' : firebaseUser.email,
+                'address' : '',
+                'displayName' : firebaseUser.displayName,
+                'photo' : firebaseUser.photoURL
+            })
+        }
+    })
+
     if (firebaseUser) {
         // console.log(firebaseUser);
         $("#btnLogout").removeClass("hide");
